@@ -1,0 +1,16 @@
+[run]
+omit = 
+   # ignore venv
+   .venv/**
+   # ignore pip
+   get-pip.py
+   # ignore test directories
+   tests/**
+   integration/**
+
+
+source=
+   # include bin directory
+   bin/**.py
+   # include a2_cli
+   a2_cli/**.py

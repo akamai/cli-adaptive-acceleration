@@ -1,0 +1,13 @@
+{
+  "requirements": {
+    "python": "3.0.0"
+  },
+  "commands": [
+    {
+      "name": "adaptive-acceleration",
+      "aliases": ["a2"],
+      "version": "0.1",
+      "description": "Reset A2 Push and Preconnect policy"
+    }
+  ]
+}

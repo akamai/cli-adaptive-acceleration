@@ -1,0 +1,7 @@
+-r requirements.txt
+pylint
+pytest
+flake8 < 2.4.0
+mock
+pytest-cov
+requests_mock

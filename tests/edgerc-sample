@@ -1,0 +1,6 @@
+[a2p-reset]
+client_secret = SeCReT12345=
+host = akab-rabdom-12345.luna.akamaiapis.net
+access_token = akab-access-token
+client_token = akab-client-token
+
