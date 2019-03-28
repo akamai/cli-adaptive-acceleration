@@ -14,26 +14,30 @@ akamai install adaptive-acceleration
 
 # Setting Up
 
+Before you can use the CLI, you need to install API keys and find the id of the property you wish to reset. 
+
 ## API Keys
 
 Generate API keys with READ-WRITE available on the Adaptive Acceleration capability as described [here](https://control.akamai.com/dl/IDM/IAM/GUID-7A592469-DDDC-4705-A3FA-C89DCD15934E.html) 
 and save them to your `~/.edgerc` file. Alternatively, you can also add the Adaptive Acceleration capability to your existing credentials. 
 
-## Finding the Property Id with Open APIs
-
-Follow the steps on the [A2 Open API](https://developer.akamai.com/api/core_features/adaptive_acceleration/v1.html#gettingstarted) doc to find the property id.
-
 ## Finding the Property Id with the CLI
 
-1. Find your property in luna.
-2. Go to Your Name > Profile.
-3. Select the Group for your property.
-4. Click "Create new API client for me".
-5. In the dialog, select the PAPI APIs with read/write credentials and the Adaptive Acceleration APIs with read/write. 
-6. Create a new credential in the dialog. 
-7. Copy the credential text out of the dialog, and paste it into ~/.edgerc, in a section named `default`.
-8. Run `akamai property retrieve exact-name-of-your-property --section default`.
-9. In the output, find the value of the `propertyId` field
+Internally Adaptive Acceleration uses a PROPERTYID to track the property you are dealing with. These steps help you find the property and allow you to run a reset. 
+
+1. Find your property in the Akamai Control Center.
+2. In the header at the top of the page, open the dropdown titled with your name and select Profile. Control Center will show you a dialog with roles for your user. Close that, so you can see the Identity and Access Management UI beneath it. 
+3. On the Users and API Clients tab, select the group dropdown that corresponds to your property. 
+4. Click "New API client for me" - it can be found to the right of the group dropdown.
+5. You will be shown a "New API client for" wizard. Hit "Next". 
+6. You should see the "Access Level" page. Enter a client name and description. 
+7. While you're still on the "Access Level" page, search for "property manager" in the filter box above the "API Service Name".
+8. You should be shown a single entry named "Property Manager (PAPI)". Click the "Access Level" and select "READ-WRITE".
+9. Hit the "Submit" button.
+10. You should be shown the API client's information in the "Users and API Clients" tab. Click the button titled "New credential".
+11. Copy the credential text out of the dialog, and paste it into ~/.edgerc, in a section named `default`.
+12. Run `akamai property retrieve exact-name-of-your-property --section default`.
+13. In the output, find the value of the `propertyId` field
    ```
    {
      "accountId": "act_B-M-1ZXZ3WU",
@@ -41,17 +45,17 @@ Follow the steps on the [A2 Open API](https://developer.akamai.com/api/core_feat
      "groupId": "grp_93848",
      "propertyId": "prp_459153",
    ```
-   the property id is the numeric part of the value (ie, the part without the "prp_" prefix). In this case, it is 459153.
+   the property id is the numeric part of the value (ie, the part without the "prp_" prefix). In this case, it is 459153. Use that in the next section to replace PROPERTYID.
 
 # Usage
 
 To reset a policy, run
 
 ```
-akamai adaptive-acceleration reset PROPERTYID
+akamai a2 reset PROPERTYID
 ```
 
-where PROPERTYID is the identifier you found in the previous section
+where PROPERTYID is the identifier you found in the previous section. 
 
 ## Global Flags
 - `--edgerc value` — Location of the credentials file (default: user's directory like "/Users/vzaytsev/.edgerc") [$AKAMAI_EDGERC]
